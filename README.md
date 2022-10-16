@@ -6,7 +6,7 @@ All the functions already have clear instructions and explanations in the code, 
 
 ### Connecting to the Database
 ```python
-DATABASE_URL = os.environ.get("JAWSDB_URL")
+DATABASE_URL = os.environ.get("<environment_variable_name>")
 credential = [x for x in re.split('/|:|@', DATABASE_URL)[1:] if x != '']
 
 username = str(credential[0])
@@ -15,7 +15,7 @@ host = str(credential[2])
 port = str(credential[3])
 database = str(credential[4])
 ```
-`DATABASE_URL` is a String object type and it will be the connection string to your database. It contains all the necessary information in order to make a connection. That is `"mysql://<username>:<password>@<host>:<port>/<database>"`. By storing your connection string in `DATABASE_URL`, through list comprehension, we filter out all the necessary information.
+`DATABASE_URL` is a string and it will be the connection string to your database. It contains all the necessary information in order to make a connection. That is `"mysql://<username>:<password>@<host>:<port>/<database>"`. By storing your connection string in `DATABASE_URL`, through list comprehension, we filter out all the necessary information. (Note: I'm using `os.environ.get("...")` to get my connection string from the environment, since I'm using Heroku. You can either do the same, or you can just set `DATABASE_URL` equal to the connection string. However, that is not a secure practice if you're going to publish or deploy your code.)
 
 ### Aid Functions
 The first two functions that appear in the code are only aid functions. They have no access to and cannot affect the database. 
