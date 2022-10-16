@@ -1,8 +1,21 @@
 # MySQL/MariaDB Python Controls
 I wrote a few functions to make it more convenient to run MySQL/MariaDB queries.
 
+You will need to have `mysql` installed. There are plenty of tutorials on the internet. For mac, you can install using pip by running `pip install mysql-connector-python`.
+
 ## Quick Start
 All the functions already have clear instructions and explanations in the code, but I will try to summarise it here as well.
+
+### Table of Contents
+- [Connecting to the Database](#connecting-to-the-database)
+- [Aid Functions](#aid-functions)
+- [Custom MySQL Queries with `runCustomQuery`](#custom-mysql-queries-with-runcustomquery)
+- [Create a Table in the Database](#create-a-table-in-the-database)
+- [Deleting a Table from the Database](#deleting-a-table-from-the-database)
+- [Updating the Entries in a Table](#updating-the-entries-in-a-table)
+- [Inserting Entries into the Table](#inserting-entries-into-the-table)
+- [Retrieving Data from Table](#retrieving-data-from-table)
+- [Deleting Entries from a Table](#deleting-entries-from-a-table)
 
 ### Connecting to the Database
 ```python
@@ -29,7 +42,7 @@ Sometimes you might just want to run your own queries. This is made slightly mor
 
 ### Create a Table in the Database
 
-This is pretty straightforward. If you're familar with SQL, the way you create a table is by running the following query
+This is pretty straightforward. If you're familiar with SQL, the way you create a table is by running the following query
 ```MYSQL
 CREATE TABLE [IF NOT EXISTS] <tablename> (
 {<COLUMN_NAME> <ATTR_TYPE> NULL|NOT NULL|PRIMARY KEY [AUTO_INCREMENT] [CHECK <condition>]}[, ...],
