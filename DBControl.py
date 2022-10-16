@@ -4,7 +4,7 @@ import re
 import logging
 import mysql.connector
 
-DATABASE_URL = os.environ.get("JAWSDB_URL")
+DATABASE_URL = os.environ.get("<environment_variable_name>")
 credential = [x for x in re.split('/|:|@', DATABASE_URL)[1:] if x != '']
 
 username = str(credential[0])
