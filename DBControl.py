@@ -70,9 +70,9 @@ def tupleToString(Data : Union[tuple, list[tuple]]) -> str:
 
 
 
-def runCustomQuery(QUERY : str, commit : bool = False, fetch : bool = False) -> bool:
+def runCustomQuery(QUERY : str, commit : bool = False, fetch : bool = False) -> tuple[bool, Union[None, str, list[tuple]]]:
 
-    """
+    """     
     Run a custom query.
 
     Parameters:
@@ -398,7 +398,7 @@ def deleteEntry(tableName : str, condition: str = None, all : bool = False) -> b
     elif condition is not None and not all:
         QUERY = "DELETE FROM {} WHERE {};".format(tableName, condition)
     else:
-        logging.exception("You cannot have condition and all both set. Please check the parameters.")
+        logging.exception("You cannot have condition and all both set and you need at least one of them set. Please check the parameters.")
         return False
 
     try:
