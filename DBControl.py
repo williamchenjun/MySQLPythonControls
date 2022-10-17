@@ -5,6 +5,7 @@ import logging
 import mysql.connector
 
 DATABASE_URL = os.environ.get("<environment_variable_name>")
+
 credential = [x for x in re.split('/|:|@', DATABASE_URL)[1:] if x != '']
 
 username = str(credential[0])
@@ -314,7 +315,7 @@ def search(tableName : str, columns : Union[str, list[str]] = "*", count : bool 
         - `columns`[String]: Column name(s). If it's not specified, all columns will be selected.
         - `count`[Boolean]: Return the number of entries instead of the entries themselves.
         - `distinct`[Boolean]: Return only distinct entries (i.e. No repetitions).
-        - `condition`[String]: Return entries that satisfy the condition. For example: `COL >= 10`.
+        - `condition`[String]: Return entries that satisfy the condition. For example: `COL >= 10` or `USERID = 12 AND COUNTRY = "ITALY"`.
     
     Output:
         - If the query is successfully executed it will return `True`. Otherwise, `False`.
@@ -342,17 +343,17 @@ def search(tableName : str, columns : Union[str, list[str]] = "*", count : bool 
         database = database
     )
     cur = conn.cursor()
-
+    cols = columns if type(columns) == str else ', '.join(columns)
     if count:
         if distinct:
-            QUERY = "SELECT COUNT(DISTINCT {}) FROM {}".format(columns or ', '.join(columns), tableName)
+            QUERY = "SELECT COUNT(DISTINCT {}) FROM {}".format(cols, tableName)
         else:
-            QUERY = "SELECT COUNT({}) FROM {}".format(columns or ', '.join(columns), tableName)
+            QUERY = "SELECT COUNT({}) FROM {}".format(cols, tableName)
     else:
         if distinct:
-            QUERY = "SELECT DISTINCT {} FROM {}".format(columns or ', '.join(columns), tableName)
+            QUERY = "SELECT DISTINCT {} FROM {}".format(cols, tableName)
         else:
-            QUERY = "SELECT {} FROM {}".format(columns or ', '.join(columns), tableName)
+            QUERY = "SELECT {} FROM {}".format(cols, tableName)
 
     if condition is not None:
         QUERY += " WHERE {}".format(condition)
@@ -366,7 +367,7 @@ def search(tableName : str, columns : Union[str, list[str]] = "*", count : bool 
         conn.close()
         return True, result
     except:
-        logging.exception("There has been an error executing the query. Please check syntax.")
+        logging.exception("There has been an error executing the query. Please check syntax. REMINDER: If your condition deals with multiple columns use the keywords AND or OR.")
         return False, None
 
 
