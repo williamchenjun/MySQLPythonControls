@@ -90,7 +90,7 @@ print(stat) #output: True
 ```
 Where the SQL equivalent is:
 ```mysql
-INSERT INTO GroupAdministrators (USER_ID, IS_ADMIN)
+INSERT INTO GroupMembers (USER_ID, IS_ADMIN)
 VALUES (19674, FALSE);
 ```
 ### Retrieving Data from Table
