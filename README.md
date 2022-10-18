@@ -61,7 +61,7 @@ The output of the function is the status. If the query runs successfully, it wil
 The function is used to drop (i.e. delete) a table from your database. `dropTable` only takes one parameter, which is the `tableName`. As you might expect, running this function will remove the specified table from the database and the output will be `True` if successful, `False` otherwise.
 
 ### Updating the Entries in a Table
-To update the entrie(s) in a table, you can use `updateTable`. It takes 3 parameters: `tableName` (string), `updated_attr` (list of tuples) and `condition` (string). The first two are mandatory: `updated_attr` should be in the form `[('COLUMN_NAME', 'UPDATED_VALUE'), ...]`. This function only allows simple updates of the type `UPDATE <tableName> SET COLUMN = VALUE, ...`. The last parameter, `condition`, allows you to set a condition (Note: the condition needs to be written in SQL and passed as a string). For example: 
+To update the entries in a table, you can use `updateTable`. It takes 3 parameters: `tableName` (string), `updated_attr` (list of tuples) and `condition` (string). The first two are mandatory: `updated_attr` should be in the form `[('COLUMN_NAME', 'UPDATED_VALUE'), ...]`. This function only allows simple updates of the type `UPDATE <tableName> SET COLUMN = VALUE, ...`. The last parameter, `condition`, allows you to set a condition (Note: the condition needs to be written in SQL and passed as a string). For example: 
 ```python
 #Fix needed: For now you have to also include " " for the values if they're strings.
 columns_to_update = [('BookAge', '"Old"'), ('PageColor', '"Yellow"'), ('BookState', '"Bad"')] 
@@ -84,7 +84,7 @@ The function `insertToTable` is used to insert new entries into the specified ta
 target = ['USER_ID', 'IS_ADMIN']
 values = [19674, 'FALSE']
 
-stat = insertToTable('GroupAdministrators', target_cols = target, values = values)
+stat = insertToTable('GroupMembers', target_cols = target, values = values)
 
 print(stat) #output: True
 ```
